@@ -5,12 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Samir Aghayev — Senior Flutter Engineer</title>
 <meta name="description" content="Samir Aghayev, Senior Mobile Engineer (Flutter). 7 years in mobile, 22 apps shipped to the App Store and Google Play.">
+<link rel="canonical" href="https://samiragaev.com/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://samiragaev.com/">
 <meta property="og:title" content="Samir Aghayev — Senior Flutter Engineer">
 <meta property="og:description" content="7 years in mobile, 22 apps shipped. Payments, live maps and real-time apps.">
-<meta property="og:image" content="photo.jpg">
+<meta property="og:image" content="https://samiragaev.com/photo.jpg">
+<meta property="og:image:width" content="480">
+<meta property="og:image:height" content="480">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Samir Aghayev — Senior Flutter Engineer">
+<meta name="twitter:description" content="7 years in mobile, 22 apps shipped. Payments, live maps and real-time apps.">
+<meta name="twitter:image" content="https://samiragaev.com/photo.jpg">
 <link rel="icon" href="photo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Pick the language before first paint: ?lang= > saved choice > English.
+  (function () {
+    var lang = 'en';
+    try {
+      var q = new URLSearchParams(location.search).get('lang');
+      var saved = localStorage.getItem('lang');
+      if (q === 'az' || q === 'en') lang = q;
+      else if (saved === 'az' || saved === 'en') lang = saved;
+    } catch (e) {}
+    document.documentElement.lang = lang;
+  })();
+</script>
 <style>
   :root {
     --bg: #0d1117;
@@ -33,6 +55,9 @@
   a:hover { text-decoration: underline; }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
 
+  /* Language switching */
+  html[lang="en"] .t-az, html[lang="az"] .t-en { display: none; }
+
   /* Nav */
   nav {
     position: sticky; top: 0; z-index: 10;
@@ -40,9 +65,18 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
   }
-  nav .wrap { display: flex; gap: 20px; height: 52px; align-items: center; overflow-x: auto; }
-  nav a { color: var(--muted); font-size: 14px; font-weight: 500; white-space: nowrap; }
-  nav a:hover { color: var(--text); text-decoration: none; }
+  nav .wrap { display: flex; align-items: center; gap: 12px; height: 52px; }
+  .links { display: flex; gap: 20px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  .links::-webkit-scrollbar { display: none; }
+  .links a { color: var(--muted); font-size: 14px; font-weight: 500; white-space: nowrap; }
+  .links a:hover { color: var(--text); text-decoration: none; }
+  .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+  .lang-switch button {
+    font: 600 12px/1 "Inter", system-ui, sans-serif; letter-spacing: .04em;
+    padding: 7px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer;
+  }
+  html[lang="en"] .lang-switch [data-lang="en"],
+  html[lang="az"] .lang-switch [data-lang="az"] { background: var(--accent); color: #0d1117; }
 
   /* Hero */
   header { padding: 56px 0 40px; }
@@ -62,8 +96,8 @@
   .actions { display: flex; flex-wrap: wrap; gap: 10px; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
-    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 9px 16px; border-radius: 8px; font: 600 14px/1.4 "Inter", system-ui, sans-serif;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer;
   }
   .btn:hover { border-color: var(--accent); text-decoration: none; }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #0d1117; }
@@ -73,7 +107,7 @@
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
   .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
   .stat b { display: block; font-size: 28px; line-height: 1.2; }
-  .stat span { color: var(--muted); font-size: 13px; }
+  .stat > span { color: var(--muted); font-size: 13px; }
 
   /* Sections */
   section { padding: 36px 0; border-top: 1px solid var(--border); }
@@ -111,21 +145,48 @@
   .job ul { margin: 8px 0 0; padding-left: 18px; color: #c9d1d9; }
   .job li { margin-bottom: 4px; }
 
+  /* Open source */
+  .oss {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
+  }
+  .oss-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .oss h3 { margin: 0; font-size: 19px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .oss .ver { color: var(--muted); font-size: 13px; }
+  .oss p { margin: 8px 0 14px; color: #c9d1d9; }
+  .oss ul { margin: 0 0 16px; padding-left: 18px; color: #c9d1d9; }
+  .oss li { margin-bottom: 4px; }
+  .oss .tags { margin-bottom: 16px; }
+  .oss .tag.ok { background: rgba(63, 185, 80, .12); color: #7ee787; }
+
   /* Projects */
   .group { margin-bottom: 28px; }
   .group:last-child { margin-bottom: 0; }
   .group h3 { font-size: 15px; margin: 0 0 12px; color: var(--text); }
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .card {
-    display: block; background: var(--surface); border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; padding: 14px 16px; color: var(--text);
-    transition: border-color .15s, transform .15s;
   }
-  a.card:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-2px); }
-  .card-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-weight: 600; }
-  .card-title .store { font-size: 12px; color: var(--accent); font-weight: 500; white-space: nowrap; }
-  .card p { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
-  .rating { color: #e3b341; font-size: 13px; font-weight: 600; }
+  .app-head { display: flex; align-items: center; gap: 12px; }
+  .app-icon {
+    position: relative; width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
+    display: grid; place-items: center; overflow: hidden;
+    background: linear-gradient(135deg, #1f6feb, #4fa3ff); color: #fff;
+    font-weight: 700; font-size: 15px;
+  }
+  .app-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .card-title { font-weight: 600; line-height: 1.3; }
+  .card p { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; flex: 1; }
+  .rating { display: block; color: #e3b341; font-size: 12px; font-weight: 600; }
+  .stores { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .store {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--text);
+    padding: 5px 10px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg);
+  }
+  .store:hover { border-color: var(--accent); text-decoration: none; }
+  .store svg { width: 14px; height: 14px; fill: currentColor; }
 
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .edu h3 { margin: 0; font-size: 17px; }
@@ -133,23 +194,13 @@
   .langs { list-style: none; margin: 0; padding: 0; }
   .langs li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
   .langs li:last-child { border-bottom: 0; }
-  .langs span { color: var(--muted); font-size: 14px; }
+  .langs li > span:last-child { color: var(--muted); font-size: 14px; }
 
   .contact { text-align: center; padding: 48px 0; }
   .contact p { color: var(--muted); margin: 0 0 20px; }
   .contact .actions { justify-content: center; }
   footer { text-align: center; color: var(--muted); font-size: 13px; padding: 24px 0 40px; }
 
-  @media (max-width: 680px) {
-    header { padding: 36px 0 28px; }
-    .hero { flex-direction: column; text-align: center; gap: 20px; }
-    .hero .actions { justify-content: center; }
-    h1 { font-size: 32px; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat b { font-size: 22px; }
-    .skill-row { grid-template-columns: 1fr; gap: 6px; }
-    .grid, .two { grid-template-columns: 1fr; }
-  }
   /* Phone choice dialog */
   dialog {
     background: var(--surface); color: var(--text);
@@ -165,8 +216,18 @@
   .btn.wa { background: #25d366; border-color: #25d366; color: #0d1117; }
   .btn.ghost { background: transparent; color: var(--muted); }
 
+  @media (max-width: 680px) {
+    header { padding: 36px 0 28px; }
+    .hero { flex-direction: column; text-align: center; gap: 20px; }
+    .hero .actions { justify-content: center; }
+    h1 { font-size: 32px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat b { font-size: 22px; }
+    .skill-row { grid-template-columns: 1fr; gap: 6px; }
+    .grid, .two { grid-template-columns: 1fr; }
+  }
   @media print {
-    nav, .actions { display: none; }
+    nav, .actions, .stores { display: none; }
   }
 </style>
 </head>
@@ -174,12 +235,19 @@
 
 <nav>
   <div class="wrap">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Apps</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+    <div class="links">
+      <a href="#about"><span class="t-en">About</span><span class="t-az" lang="az">Haqqımda</span></a>
+      <a href="#skills"><span class="t-en">Skills</span><span class="t-az" lang="az">Bacarıqlar</span></a>
+      <a href="#experience"><span class="t-en">Experience</span><span class="t-az" lang="az">Təcrübə</span></a>
+      <a href="#open-source">Open source</a>
+      <a href="#projects"><span class="t-en">Apps</span><span class="t-az" lang="az">Tətbiqlər</span></a>
+      <a href="#education"><span class="t-en">Education</span><span class="t-az" lang="az">Təhsil</span></a>
+      <a href="#contact"><span class="t-en">Contact</span><span class="t-az" lang="az">Əlaqə</span></a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="az">AZ</button>
+    </div>
   </div>
 </nav>
 
@@ -191,11 +259,11 @@
     <div>
       <h1>Samir Aghayev</h1>
       <p class="role">Senior Mobile Engineer · Flutter</p>
-      <p class="loc">Baku, Azerbaijan</p>
-      <div class="badge">● Open to on-site, hybrid and remote roles · Baku or relocation</div>
+      <p class="loc"><span class="t-en">Baku, Azerbaijan</span><span class="t-az" lang="az">Bakı, Azərbaycan</span></p>
+      <div class="badge">● <span class="t-en">Open to on-site, hybrid and remote roles · Baku or relocation</span><span class="t-az" lang="az">Ofis, hibrid və uzaqdan iş təkliflərinə açığam · Bakı və ya relokasiya</span></div>
       <div class="actions">
         <a class="btn primary" href="Samir_Aghayev_CV.pdf" download>
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>Download CV
+          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg><span class="t-en">Download CV</span><span class="t-az" lang="az">CV-ni yüklə</span>
         </a>
         <a class="btn" href="https://www.linkedin.com/in/samir-aghayev-bb7a08207/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.1 1.43-2.1 2.9V21h-4V9z"/></svg>LinkedIn
@@ -211,23 +279,24 @@
   </div>
 
   <div class="stats">
-    <div class="stat"><b>7</b><span>years in mobile</span></div>
-    <div class="stat"><b>22</b><span>apps shipped</span></div>
+    <div class="stat"><b>7</b><span><span class="t-en">years in mobile</span><span class="t-az" lang="az">il mobil təcrübə</span></span></div>
+    <div class="stat"><b>22</b><span><span class="t-en">apps shipped</span><span class="t-az" lang="az">dərc olunmuş tətbiq</span></span></div>
     <div class="stat"><b>iOS + Android</b><span>App Store &amp; Google Play</span></div>
-    <div class="stat"><b>US · Israel</b><span>remote teams</span></div>
+    <div class="stat"><b><span class="t-en">US · Israel</span><span class="t-az" lang="az">ABŞ · İsrail</span></b><span><span class="t-en">remote teams</span><span class="t-az" lang="az">uzaqdan komandalar</span></span></div>
   </div>
 </header>
 
 <section id="about" class="about">
-  <h2>About</h2>
-  <p>Flutter developer with 7 years in mobile. I have shipped 22 apps to the App Store and Google Play, mostly for retail, fintech and utility companies in Azerbaijan, with remote work for teams in the US and Israel. Most of what I build sits in the awkward parts of an app: <strong>payments, live maps, and real-time state</strong> that has to survive a bad connection. Currently leading mobile development at RTH under TABİB.</p>
+  <h2><span class="t-en">About</span><span class="t-az" lang="az">Haqqımda</span></h2>
+  <p class="t-en">Flutter developer with 7 years in mobile. I have shipped 22 apps to the App Store and Google Play, mostly for retail, fintech and utility companies in Azerbaijan, with remote work for teams in the US and Israel. Most of what I build sits in the awkward parts of an app: <strong>payments, live maps, and real-time state</strong> that has to survive a bad connection. Currently leading mobile development at RTH under TABİB.</p>
+  <p class="t-az" lang="az">Mobil sahədə 7 il təcrübəsi olan Flutter tərtibatçısıyam. App Store və Google Play-də 22 tətbiq dərc etmişəm. Əsasən Azərbaycanda pərakəndə, fintex və kommunal şirkətləri üçün işləmişəm, ABŞ və İsraildəki komandalarla da uzaqdan çalışmışam. Ən çox tətbiqlərin çətin hissələri ilə məşğul oluram: <strong>ödənişlər, canlı xəritələr və real vaxtda işləyən vəziyyət</strong>, hansı ki, zəif internetdə də düzgün işləməlidir. Hazırda TƏBİB nəzdində RTH-də mobil inkişafa rəhbərlik edirəm.</p>
 </section>
 
 <section id="skills">
-  <h2>Skills</h2>
+  <h2><span class="t-en">Skills</span><span class="t-az" lang="az">Bacarıqlar</span></h2>
   <div class="skills">
     <div class="skill-row">
-      <div>Languages</div>
+      <div><span class="t-en">Languages</span><span class="t-az" lang="az">Proqramlaşdırma dilləri</span></div>
       <div class="tags"><span class="tag">Dart</span><span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Swift</span><span class="tag">JavaScript</span></div>
     </div>
     <div class="skill-row">
@@ -235,163 +304,284 @@
       <div class="tags"><span class="tag">BLoC</span><span class="tag">Provider</span><span class="tag">RxDart</span><span class="tag">get_it</span><span class="tag">Clean Architecture</span><span class="tag">MVVM</span><span class="tag">Platform channels</span><span class="tag">Responsive &amp; custom UI</span></div>
     </div>
     <div class="skill-row">
-      <div>Integrations</div>
+      <div><span class="t-en">Integrations</span><span class="t-az" lang="az">İnteqrasiyalar</span></div>
       <div class="tags"><span class="tag">REST / Dio</span><span class="tag">WebSockets</span><span class="tag">Firebase</span><span class="tag">FCM</span><span class="tag">Crashlytics</span><span class="tag">OneSignal</span><span class="tag">Payment gateways</span><span class="tag">Google Maps</span><span class="tag">OpenStreetMap</span><span class="tag">Geolocation &amp; foreground services</span><span class="tag">Deep links</span><span class="tag">NFC</span></div>
     </div>
     <div class="skill-row">
-      <div>Workflow</div>
+      <div><span class="t-en">Workflow</span><span class="t-az" lang="az">İş prosesi</span></div>
       <div class="tags"><span class="tag">Git (GitLab, Bitbucket)</span><span class="tag">Jira</span><span class="tag">Scrum</span><span class="tag">App Store Connect</span><span class="tag">Play Console</span><span class="tag">Code review</span></div>
     </div>
   </div>
 </section>
 
 <section id="experience">
-  <h2>Experience</h2>
+  <h2><span class="t-en">Experience</span><span class="t-az" lang="az">İş təcrübəsi</span></h2>
 
   <div class="job">
-    <div class="job-head"><h3>Senior Flutter Developer <span class="company">· RTH under TABİB, Baku</span></h3><span class="date">2024 – Present</span></div>
-    <ul>
+    <div class="job-head"><h3>Senior Flutter Developer <span class="company">· <span class="t-en">RTH under TABİB, Baku</span><span class="t-az" lang="az">TƏBİB nəzdində RTH, Bakı</span></span></h3><span class="date"><span class="t-en">2024 – Present</span><span class="t-az" lang="az">2024 – indi</span></span></div>
+    <ul class="t-en">
       <li>Lead mobile development for healthcare applications.</li>
       <li>Set the architecture the team builds on: Clean Architecture with BLoC and get_it, so features stay separate and testable.</li>
       <li>Handle releases end to end, from build flavors through App Store submission, then monitor Crashlytics after each rollout.</li>
     </ul>
+    <ul class="t-az" lang="az">
+      <li>Səhiyyə tətbiqlərinin mobil inkişafına rəhbərlik edirəm.</li>
+      <li>Komandanın arxitekturasını qurmuşam: BLoC və get_it ilə Clean Architecture. Belə ki, funksiyalar bir-birindən ayrı və test oluna bilən qalır.</li>
+      <li>Relizləri əvvəldən axıra özüm aparıram: build flavor-lardan App Store-a göndərişə qədər, sonra hər buraxılışdan sonra Crashlytics-i izləyirəm.</li>
+    </ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Senior Software Engineer <span class="company">· Fayton LLC, USA (contract, remote)</span></h3><span class="date">2024 – 2026</span></div>
-    <ul>
+    <div class="job-head"><h3>Senior Software Engineer <span class="company">· Fayton LLC, <span class="t-en">USA (contract, remote)</span><span class="t-az" lang="az">ABŞ (müqavilə, uzaqdan)</span></span></h3><span class="date">2024 – 2026</span></div>
+    <ul class="t-en">
       <li>Built the whole Fayton platform: the passenger app, the driver app and the website.</li>
       <li>Matching flow over WebSockets: driver location, route creation, fare negotiation and order state, reconciling when a driver loses signal between cities.</li>
       <li>Location layer on Geolocator and a foreground service, batching updates so long intercity routes don't drain the battery.</li>
       <li>Both apps are live on the App Store and Google Play.</li>
     </ul>
-  </div>
-
-  <div class="job">
-    <div class="job-head"><h3>Senior Flutter Developer <span class="company">· NMSOFT LLC, Baku</span></h3><span class="date">2024 – 2025</span></div>
-    <ul>
-      <li>Built E-Bina and E-Bina Manager: balance top-up, payment history, service requests and intercom control.</li>
-      <li>Extracted shared code into an internal package that cut a few weeks off each new client project.</li>
+    <ul class="t-az" lang="az">
+      <li>Bütün Fayton platformasını qurmuşam: sərnişin tətbiqi, sürücü tətbiqi və veb sayt.</li>
+      <li>WebSocket üzərində uyğunlaşdırma axını: sürücü yeri, marşrut, qiymət razılaşması və sifariş vəziyyəti. Şəhərlər arasında sürücünün siqnalı itəndə vəziyyət yenidən sinxronlaşır.</li>
+      <li>Geolocator və foreground service üzərində yer xidməti qurmuşam. Yeniləmələr toplu göndərilir ki, uzun şəhərlərarası yollarda batareya tez bitməsin.</li>
+      <li>Hər iki tətbiq App Store və Google Play-dədir.</li>
     </ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Middle Flutter Developer <span class="company">· Jeykhun Imanov Studio, Baku</span></h3><span class="date">2023 – 2024</span></div>
-    <ul><li>Maintained and extended existing Flutter apps, mostly e-commerce.</li></ul>
+    <div class="job-head"><h3>Senior Flutter Developer <span class="company">· NMSOFT LLC, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2024 – 2025</span></div>
+    <ul class="t-en">
+      <li>Built E-Bina and E-Bina Manager: balance top-up, payment history, service requests and intercom control.</li>
+      <li>Extracted shared code into an internal package that cut a few weeks off each new client project.</li>
+    </ul>
+    <ul class="t-az" lang="az">
+      <li>E-Bina və E-Bina Manager tətbiqlərini hazırlamışam: balans artırma, ödəniş tarixçəsi, xidmət sorğuları və domofon idarəsi.</li>
+      <li>Ortaq kodu daxili paketə çıxarmışam. Bu, hər yeni müştəri layihəsində bir neçə həftə vaxta qənaət etdi.</li>
+    </ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Middle Flutter Developer <span class="company">· NSPSolutions LLC, Baku</span></h3><span class="date">2022 – 2024</span></div>
-    <ul>
+    <div class="job-head"><h3>Middle Flutter Developer <span class="company">· Jeykhun Imanov Studio, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2023 – 2024</span></div>
+    <ul class="t-en"><li>Maintained and extended existing Flutter apps, mostly e-commerce.</li></ul>
+    <ul class="t-az" lang="az"><li>Mövcud Flutter tətbiqlərini, əsasən e-ticarət, dəstəkləmiş və genişləndirmişəm.</li></ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><h3>Middle Flutter Developer <span class="company">· NSPSolutions LLC, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2022 – 2024</span></div>
+    <ul class="t-en">
       <li>Worked across e-commerce, retail loyalty and payment apps.</li>
       <li>Integrated card payments, FCM and OneSignal notifications, deep links and Firebase Analytics.</li>
       <li>Reduced crashes and jank in production apps using Crashlytics reports and DevTools profiling.</li>
     </ul>
+    <ul class="t-az" lang="az">
+      <li>E-ticarət, loyallıq və ödəniş tətbiqləri üzərində işləmişəm.</li>
+      <li>Kartla ödəniş, FCM və OneSignal bildirişləri, deep link-lər və Firebase Analytics inteqrasiya etmişəm.</li>
+      <li>Crashlytics hesabatları və DevTools profilinqi ilə canlı tətbiqlərdə çökmələri və donmaları azaltmışam.</li>
+    </ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Flutter Developer <span class="company">· ELX LLC, Baku</span></h3><span class="date">2021 – 2022</span></div>
-    <ul><li>Built both sides of a ride-hailing product: the driver app and the passenger app.</li></ul>
+    <div class="job-head"><h3>Flutter Developer <span class="company">· ELX LLC, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2021 – 2022</span></div>
+    <ul class="t-en"><li>Built both sides of a ride-hailing product: the driver app and the passenger app.</li></ul>
+    <ul class="t-az" lang="az"><li>Taksi sifarişi məhsulunun hər iki tərəfini hazırlamışam: sürücü və sərnişin tətbiqləri.</li></ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Junior Flutter Developer <span class="company">· Medium Creative Agency, Baku</span></h3><span class="date">2020 – 2021</span></div>
-    <ul><li>Switched from Android to Flutter. Shipped several client projects from scratch and maintained Ofisait and Fraza.</li></ul>
+    <div class="job-head"><h3>Junior Flutter Developer <span class="company">· Medium Creative Agency, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2020 – 2021</span></div>
+    <ul class="t-en"><li>Switched from Android to Flutter. Shipped several client projects from scratch and maintained Ofisait and Fraza.</li></ul>
+    <ul class="t-az" lang="az"><li>Android-dən Flutter-ə keçmişəm. Bir neçə müştəri layihəsini sıfırdan hazırlamış, Ofisait və Fraza tətbiqlərini dəstəkləmişəm.</li></ul>
   </div>
 
   <div class="job">
-    <div class="job-head"><h3>Junior Android Developer <span class="company">· Frazex LLC, Baku</span></h3><span class="date">2019 – 2020</span></div>
-    <ul><li>First job. Maintained production Android applications.</li></ul>
+    <div class="job-head"><h3>Junior Android Developer <span class="company">· Frazex LLC, <span class="t-en">Baku</span><span class="t-az" lang="az">Bakı</span></span></h3><span class="date">2019 – 2020</span></div>
+    <ul class="t-en"><li>First job. Maintained production Android applications.</li></ul>
+    <ul class="t-az" lang="az"><li>İlk iş yerim. Canlı Android tətbiqlərini dəstəkləmişəm.</li></ul>
+  </div>
+</section>
+
+<section id="open-source">
+  <h2>Open source</h2>
+  <div class="oss">
+    <div class="oss-head">
+      <h3>dio_debug_logger</h3>
+      <span class="ver">v0.4.0 · MIT</span>
+    </div>
+    <p class="t-en">An in-app network inspector for Dio, published on pub.dev. Two lines to set up, and automatically disabled in release builds.</p>
+    <p class="t-az" lang="az">Dio üçün tətbiq daxilində şəbəkə inspektoru, pub.dev-də dərc olunub. Qoşulması iki sətirdir, release build-lərdə avtomatik söndürülür.</p>
+    <ul class="t-en">
+      <li>Draggable debug button that opens a searchable request log with request, response and error details.</li>
+      <li>Statistics, retry, and export as cURL, Postman or JSON.</li>
+      <li>Passwords, tokens and keys masked everywhere: UI, console, copy and export.</li>
+      <li>Switch between dev, staging and prod backends at runtime.</li>
+    </ul>
+    <ul class="t-az" lang="az">
+      <li>Sürüklənən debug düyməsi: axtarışlı sorğu siyahısı, sorğu, cavab və xəta detalları.</li>
+      <li>Statistika, sorğunu təkrarlamaq, cURL, Postman və ya JSON kimi ixrac.</li>
+      <li>Parol, token və açarlar hər yerdə gizlədilir: interfeys, konsol, kopyalama və ixrac.</li>
+      <li>İş zamanı dev, staging və prod serverləri arasında keçid.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag ok">160 / 160 pub points</span>
+      <span class="tag">Android · iOS · Web · Desktop</span>
+      <span class="tag">Dart 3 · null-safe</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://pub.dev/packages/dio_debug_logger" target="_blank" rel="noopener">pub.dev ↗</a>
+      <a class="btn" href="https://github.com/samiraghayev12/logging" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg><span class="t-en">Source code</span><span class="t-az" lang="az">Mənbə kodu</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <section id="projects">
-  <h2>Selected apps</h2>
+  <h2><span class="t-en">Selected apps</span><span class="t-az" lang="az">Seçilmiş tətbiqlər</span></h2>
 
   <div class="group">
-    <h3>Shopping and retail</h3>
-    <div class="grid">
-      <a class="card" href="https://apps.apple.com/az/app/irshad-az/id1645503622" target="_blank" rel="noopener">
-        <div class="card-title">Irshad.az <span class="store">App Store ↗</span></div>
-        <p>Electronics retailer: 40,000-product catalogue, guest checkout, order tracking. <span class="rating">★ 4.2 · 273 ratings</span></p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/ofisait-az-onlayn-al%C4%B1%C5%9F-veri%C5%9F/id6503353566" target="_blank" rel="noopener">
-        <div class="card-title">Ofisait.az <span class="store">App Store ↗</span></div>
-        <p>Online store with coupon codes, lottery mechanics and nearby-store notifications. <span class="rating">★ 4.6</span></p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/etta/id6476774144" target="_blank" rel="noopener">
-        <div class="card-title">Etta <span class="store">App Store ↗</span></div>
-        <p>Cosmetics and beauty marketplace for an official distributor.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/%C9%99min-bazar/id6476768774" target="_blank" rel="noopener">
-        <div class="card-title">Əmin Bazar <span class="store">App Store ↗</span></div>
-        <p>Loyalty app with a bonus wallet and a shake-to-reveal daily deal.</p>
-      </a>
-    </div>
-  </div>
-
-  <div class="group">
-    <h3>Payments and loyalty</h3>
+    <h3><span class="t-en">Shopping and retail</span><span class="t-az" lang="az">Alış-veriş və pərakəndə</span></h3>
     <div class="grid">
       <div class="card">
-        <div class="card-title">Kassam.az &amp; PayPark.az</div>
-        <p>Payment and parking-payment platforms, mobile and web.</p>
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">I<img src="icons/irshad.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Irshad.az <span class="rating">★ 4.2 · 273</span></div>
+        </div>
+        <p><span class="t-en">Electronics retailer: 40,000-product catalogue, guest checkout, order tracking.</span><span class="t-az" lang="az">Elektronika mağazası: 40 000 məhsullu kataloq, qeydiyyatsız sifariş, sifarişin izlənməsi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/irshad-az/id1645503622" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.irshad.irshad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
       </div>
       <div class="card">
-        <div class="card-title">MyBanko</div>
-        <p>Banking and payments application.</p>
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">O<img src="icons/ofisait.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Ofisait.az <span class="rating">★ 4.6</span></div>
+        </div>
+        <p><span class="t-en">Online store with coupon codes, lottery mechanics and nearby-store notifications.</span><span class="t-az" lang="az">Kupon kodları, lotereya və yaxınlıqdakı mağaza bildirişləri olan onlayn mağaza.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/ofisait-az-onlayn-al%C4%B1%C5%9F-veri%C5%9F/id6503353566" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.ofisait.app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
       </div>
-      <a class="card" href="https://apps.apple.com/az/app/norm-bonus/id1672662147" target="_blank" rel="noopener">
-        <div class="card-title">Norm Bonus <span class="store">App Store ↗</span></div>
-        <p>Ordering and bonus redemption for Norm OJSC cement dealers. <span class="rating">★ 4.2</span></p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/norm-ustalar-klubu/id6445846797" target="_blank" rel="noopener">
-        <div class="card-title">NORM Ustalar Klubu <span class="store">App Store ↗</span></div>
-        <p>Loyalty programme for trade professionals, with rewards and campaigns.</p>
-      </a>
-    </div>
-  </div>
-
-  <div class="group">
-    <h3>Transport, utilities and property</h3>
-    <div class="grid">
-      <a class="card" href="https://apps.apple.com/az/app/fayton-user/id6739486123" target="_blank" rel="noopener">
-        <div class="card-title">Fayton User <span class="store">App Store ↗</span></div>
-        <p>Intercity rides and parcel delivery for passengers and senders.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/fayton-driver/id6739328259" target="_blank" rel="noopener">
-        <div class="card-title">Fayton Driver <span class="store">App Store ↗</span></div>
-        <p>Driver side: route creation, fare setting and cargo acceptance.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/azerishiq/id6504283925" target="_blank" rel="noopener">
-        <div class="card-title">Azerishiq <span class="store">App Store ↗</span></div>
-        <p>National electricity operator's app: debt, consumption, payment history, support chat.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/e-bina/id6581491623" target="_blank" rel="noopener">
-        <div class="card-title">E-Bina <span class="store">App Store ↗</span></div>
-        <p>Property management for residents: balance top-up, payment history, service requests and intercom control.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/e-bina-manager/id6566180473" target="_blank" rel="noopener">
-        <div class="card-title">E-Bina Manager <span class="store">App Store ↗</span></div>
-        <p>The building managers' side of E-Bina. Also built apps for Baku City Residence, Harmony Residence, Avenue Group and Huner Group.</p>
-      </a>
-    </div>
-  </div>
-
-  <div class="group">
-    <h3>Education, media and agriculture</h3>
-    <div class="grid">
-      <a class="card" href="https://apps.apple.com/az/app/unimastery/id6738735338" target="_blank" rel="noopener">
-        <div class="card-title">UniMastery <span class="store">App Store ↗</span></div>
-        <p>Branded courses, workshops and 1:1 sessions with messaging and payments. Remote client, Israel.</p>
-      </a>
-      <a class="card" href="https://apps.apple.com/az/app/yeniavaz/id1503989598" target="_blank" rel="noopener">
-        <div class="card-title">Yeniavaz <span class="store">App Store ↗</span></div>
-        <p>Daily news application.</p>
-      </a>
       <div class="card">
-        <div class="card-title">Dr.Agro &amp; Agroom</div>
-        <p>Agriculture sector applications.</p>
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">E<img src="icons/etta.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Etta</div>
+        </div>
+        <p><span class="t-en">Cosmetics and beauty marketplace for an official distributor.</span><span class="t-az" lang="az">Rəsmi distribyutor üçün kosmetika və gözəllik marketpleysi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/etta/id6476774144" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=nsp.solutions.kripton.etta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">ƏB<img src="icons/emin-bazar.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Əmin Bazar</div>
+        </div>
+        <p><span class="t-en">Loyalty app with a bonus wallet and a shake-to-reveal daily deal.</span><span class="t-az" lang="az">Bonus pul kisəsi və telefonu silkələyərək açılan gündəlik endirimi olan loyallıq tətbiqi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/%C9%99min-bazar/id6476768774" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=nsp.solutions.ilgim" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3><span class="t-en">Payments and loyalty</span><span class="t-az" lang="az">Ödənişlər və loyallıq</span></h3>
+    <div class="grid">
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">KP<img src="icons/paypark.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Kassam.az &amp; PayPark.az</div>
+        </div>
+        <p><span class="t-en">Payment and parking-payment platforms, mobile and web.</span><span class="t-az" lang="az">Ödəniş və parkinq ödənişi platformaları, mobil və veb.</span></p>
+          <div class="stores"><a class="store" href="https://play.google.com/store/apps/details?id=nsp.solutions.paypark" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">M<img src="icons/mybanko.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">MyBanko</div>
+        </div>
+        <p><span class="t-en">Banking and payments application.</span><span class="t-az" lang="az">Bank və ödəniş tətbiqi.</span></p>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">NB<img src="icons/norm-bonus.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Norm Bonus <span class="rating">★ 4.2</span></div>
+        </div>
+        <p><span class="t-en">Ordering and bonus redemption for Norm OJSC cement dealers.</span><span class="t-az" lang="az">Norm ASC sement dilerləri üçün sifariş və bonusların istifadəsi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/norm-bonus/id1672662147" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=norm.az.norm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">NU<img src="icons/norm-ustalar.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">NORM Ustalar Klubu</div>
+        </div>
+        <p><span class="t-en">Loyalty programme for trade professionals, with rewards and campaigns.</span><span class="t-az" lang="az">Ustalar üçün mükafat və kampaniyaları olan loyallıq proqramı.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/norm-ustalar-klubu/id6445846797" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.loyalist.normapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3><span class="t-en">Transport, utilities and property</span><span class="t-az" lang="az">Nəqliyyat, kommunal və əmlak</span></h3>
+    <div class="grid">
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">FU<img src="icons/fayton-user.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Fayton User</div>
+        </div>
+        <p><span class="t-en">Intercity rides and parcel delivery for passengers and senders.</span><span class="t-az" lang="az">Sərnişinlər və göndərənlər üçün şəhərlərarası səfər və bağlama çatdırılması.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/fayton-user/id6739486123" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.fayton.com.android" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">FD<img src="icons/fayton-driver.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Fayton Driver</div>
+        </div>
+        <p><span class="t-en">Driver side: route creation, fare setting and cargo acceptance.</span><span class="t-az" lang="az">Sürücü tərəfi: marşrut yaratmaq, qiymət təyin etmək və yük qəbulu.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/fayton-driver/id6739328259" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.fayton.driver.fayton" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">A<img src="icons/azerishiq.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Azerishiq</div>
+        </div>
+        <p><span class="t-en">National electricity operator's app: debt, consumption, payment history, support chat.</span><span class="t-az" lang="az">Milli elektrik operatorunun tətbiqi: borc, istehlak, ödəniş tarixçəsi, dəstək çatı.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/azerishiq/id6504283925" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.azerishiq.edm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">E<img src="icons/ebina.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">E-Bina</div>
+        </div>
+        <p><span class="t-en">Property management for residents: balance top-up, payment history, service requests and intercom control.</span><span class="t-az" lang="az">Sakinlər üçün əmlak idarəetməsi: balans artırma, ödəniş tarixçəsi, xidmət sorğuları və domofon idarəsi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/e-bina/id6581491623" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.nmsoft.ebina.resident" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">EM<img src="icons/ebina-manager.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">E-Bina Manager</div>
+        </div>
+        <p><span class="t-en">The building managers' side of E-Bina. Also built apps for Baku City Residence, Harmony Residence, Avenue Group and Huner Group.</span><span class="t-az" lang="az">E-Bina-nın bina idarəçiləri üçün tərəfi. Həmçinin Baku City Residence, Harmony Residence, Avenue Group və Huner Group üçün tətbiqlər.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/e-bina-manager/id6566180473" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=az.nmsoft.ebina.manager" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3><span class="t-en">Education, media and agriculture</span><span class="t-az" lang="az">Təhsil, media və kənd təsərrüfatı</span></h3>
+    <div class="grid">
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">U<img src="icons/unimastery.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">UniMastery</div>
+        </div>
+        <p><span class="t-en">Branded courses, workshops and 1:1 sessions with messaging and payments. Remote client, Israel.</span><span class="t-az" lang="az">Mesajlaşma və ödənişlə brendli kurslar, vorkşoplar və fərdi dərslər. Uzaqdan müştəri, İsrail.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/unimastery/id6738735338" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.pk.unimastery" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 2.2a1.5 1.5 0 00-.6 1.2v17.2a1.5 1.5 0 00.6 1.2l9.7-9.8zm10.8 8.7l2.7-2.7L5.4 1.6zm0 2.2l-9 9.3 11.7-6.6zm3.7-4.3l-2.9 3.2 2.9 3.2 3.3-1.9a1.5 1.5 0 000-2.6z"/></svg>Google Play</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">Y<img src="icons/yeniavaz.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Yeniavaz</div>
+        </div>
+        <p><span class="t-en">Daily news application.</span><span class="t-az" lang="az">Gündəlik xəbər tətbiqi.</span></p>
+          <div class="stores"><a class="store" href="https://apps.apple.com/az/app/yeniavaz/id1503989598" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 00-3.6-1.9c-1.5-.2-3 .9-3.7.9-.8 0-2-.9-3.2-.9a4.8 4.8 0 00-4 2.5c-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4a10 10 0 001.3-2.8 4.3 4.3 0 01-2.4-3.8zM14 5.4A4.3 4.3 0 0015 2.3a4.4 4.4 0 00-2.9 1.5 4.1 4.1 0 00-1 3 3.6 3.6 0 002.9-1.4z"/></svg>App Store</a></div>
+      </div>
+      <div class="card">
+        <div class="app-head">
+          <div class="app-icon" aria-hidden="true">DA<img src="icons/agro.png" alt="" loading="lazy" onerror="this.remove()"></div>
+          <div class="card-title">Dr.Agro &amp; Agroom</div>
+        </div>
+        <p><span class="t-en">Agriculture sector applications.</span><span class="t-az" lang="az">Kənd təsərrüfatı sahəsi üçün tətbiqlər.</span></p>
       </div>
     </div>
   </div>
@@ -400,24 +590,27 @@
 <section id="education">
   <div class="two">
     <div class="edu">
-      <h2>Education</h2>
-      <h3>BSc Information Security</h3>
-      <p>Azerbaijan Technical University, Baku · 2019 – 2023</p>
-      <p style="margin-top:16px">Outside work: I play guitar, and I pick up new languages the same way I pick up new frameworks.</p>
+      <h2><span class="t-en">Education</span><span class="t-az" lang="az">Təhsil</span></h2>
+      <h3><span class="t-en">BSc Information Security</span><span class="t-az" lang="az">İnformasiya təhlükəsizliyi, bakalavr</span></h3>
+      <p><span class="t-en">Azerbaijan Technical University, Baku</span><span class="t-az" lang="az">Azərbaycan Texniki Universiteti, Bakı</span> · 2019 – 2023</p>
+      <p style="margin-top:16px" class="t-en">Outside work: I play guitar, and I pick up new languages the same way I pick up new frameworks.</p>
+      <p style="margin-top:16px" class="t-az" lang="az">İşdən kənar: gitara çalıram, yeni dilləri də yeni framework-lər kimi həvəslə öyrənirəm.</p>
     </div>
     <div>
-      <h2>Languages</h2>
+      <h2><span class="t-en">Languages</span><span class="t-az" lang="az">Dillər</span></h2>
       <ul class="langs">
-        <li>Azerbaijani <span>Native</span></li>
-        <li>English <span>Professional working</span></li>
+        <li><span><span class="t-en">Azerbaijani</span><span class="t-az" lang="az">Azərbaycan dili</span></span><span><span class="t-en">Native</span><span class="t-az" lang="az">Ana dili</span></span></li>
+        <li><span><span class="t-en">Turkish</span><span class="t-az" lang="az">Türk dili</span></span><span><span class="t-en">Native</span><span class="t-az" lang="az">Ana dili səviyyəsində</span></span></li>
+        <li><span><span class="t-en">English</span><span class="t-az" lang="az">İngilis dili</span></span><span><span class="t-en">Professional working</span><span class="t-az" lang="az">Peşəkar iş səviyyəsi</span></span></li>
       </ul>
     </div>
   </div>
 </section>
 
 <section id="contact" class="contact">
-  <h2>Contact</h2>
-  <p>Open to on-site, hybrid and remote roles, in Baku or with relocation. The fastest way to reach me is email or LinkedIn.</p>
+  <h2><span class="t-en">Contact</span><span class="t-az" lang="az">Əlaqə</span></h2>
+  <p class="t-en">Open to on-site, hybrid and remote roles, in Baku or with relocation. The fastest way to reach me is email or LinkedIn.</p>
+  <p class="t-az" lang="az">Bakıda və ya relokasiya ilə ofis, hibrid və uzaqdan iş təkliflərinə açığam. Mənimlə ən tez email və ya LinkedIn vasitəsilə əlaqə saxlaya bilərsiniz.</p>
   <div class="actions">
     <a class="btn primary" href="mailto:samir091718@gmail.com">samir091718@gmail.com</a>
     <a class="btn" href="tel:+994508519076" id="phone-btn">+994 50 851 90 76</a>
@@ -430,24 +623,34 @@
 <footer>© 2026 Samir Aghayev</footer>
 
 <dialog id="phone-dialog">
-  <h3>Contact Samir</h3>
+  <h3><span class="t-en">Contact Samir</span><span class="t-az" lang="az">Samirlə əlaqə</span></h3>
   <p>+994 50 851 90 76</p>
   <div class="choices">
     <a class="btn wa" href="https://wa.me/994508519076" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.5-.3z"/></svg>WhatsApp
     </a>
     <a class="btn primary" href="tel:+994508519076">
-      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.25 1z"/></svg>Call
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.25 1z"/></svg><span class="t-en">Call</span><span class="t-az" lang="az">Zəng et</span>
     </a>
-    <button class="btn ghost" type="button" id="phone-close">Cancel</button>
+    <button class="btn ghost" type="button" id="phone-close"><span class="t-en">Cancel</span><span class="t-az" lang="az">Bağla</span></button>
   </div>
 </dialog>
 
 <script>
   (function () {
+    // Language switch
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var lang = b.getAttribute('data-lang');
+        document.documentElement.lang = lang;
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+      });
+    });
+
+    // Phone: ask WhatsApp or call (old browsers keep the plain tel: link)
     var dlg = document.getElementById('phone-dialog');
     var btn = document.getElementById('phone-btn');
-    if (!dlg || typeof dlg.showModal !== 'function') return; // old browsers: plain tel: link
+    if (!dlg || typeof dlg.showModal !== 'function') return;
     btn.addEventListener('click', function (e) { e.preventDefault(); dlg.showModal(); });
     document.getElementById('phone-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
