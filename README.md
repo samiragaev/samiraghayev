@@ -6,5 +6,4 @@ Static, dark-mode resume page. No build step: open `index.html` in a browser.
 - `photo.jpg` — profile photo
 - `Samir_Aghayev_CV.pdf` — downloadable CV
 
-Live at https://samiraghayev12.github.io/samiraghayev/ once GitHub Pages is
-enabled (Settings → Pages → Deploy from a branch → `main` / root).
+Live at https://samiragaev.com (GitHub Pages with a custom domain, see `CNAME`).
