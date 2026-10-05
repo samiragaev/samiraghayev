@@ -133,7 +133,7 @@
   .btn svg { width: 16px; height: 16px; fill: currentColor; }
 
   /* Stats */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 36px; }
   .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
   .stat b { display: block; font-size: 28px; line-height: 1.2; }
   .stat > span { color: var(--muted); font-size: 13px; }
@@ -252,6 +252,7 @@
     h1 { font-size: 32px; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .stat b { font-size: 22px; }
+    .stat:last-child { grid-column: 1 / -1; }
     .skill-row { grid-template-columns: 1fr; gap: 6px; }
     .grid, .two { grid-template-columns: 1fr; }
   }
@@ -311,7 +312,6 @@
     <div class="stat"><b>7</b><span><span class="t-en">years in mobile</span><span class="t-az" lang="az">il mobil təcrübə</span></span></div>
     <div class="stat"><b>22</b><span><span class="t-en">apps shipped</span><span class="t-az" lang="az">dərc olunmuş tətbiq</span></span></div>
     <div class="stat"><b>iOS + Android</b><span>App Store &amp; Google Play</span></div>
-    <div class="stat"><b><span class="t-en">US · Israel</span><span class="t-az" lang="az">ABŞ · İsrail</span></b><span><span class="t-en">remote teams</span><span class="t-az" lang="az">uzaqdan komandalar</span></span></div>
   </div>
 </header>
 
